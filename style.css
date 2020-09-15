@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  background-color: #edf2ff;
+  font-family: 'Sniglet', cursive;
+}
+
+.container {
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  max-width: 700px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.header > .addTask {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 50px;
+}
+
+.logo span {
+  margin-left: 10px;
+  font-weight: bolder;
+  font-size: 3rem;
+}
+
+.button {
+  background-color: #4180ff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: #fff;
+}
