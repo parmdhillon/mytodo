@@ -3,8 +3,13 @@ const switchBtnCompleted = document.getElementById('switchBtnCompleted');
 
 // Toggles Tasks on Mobile Devices
 const toggleTask = () => {
-  switchBtnCompleted.classList.toggle('active');
-  switchBtnActive.classList.toggle('active');
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    document.querySelector('.taskSwitches--wrapper').classList.toggle('slide');
+    setTimeout(() => {
+      switchBtnCompleted.classList.toggle('active');
+      switchBtnActive.classList.toggle('active');
+    }, 200); //Toggle Task Button Animation
+  }
 };
 
 switchBtnActive.addEventListener('click', toggleTask);

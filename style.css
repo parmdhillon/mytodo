@@ -99,21 +99,40 @@ button:focus {
 .taskSwitches--wrapper {
   background-color: #fff;
   border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.taskSwitches--wrapper::after {
+  content: '';
+  background-color: #4180ff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -57%;
+  border-radius: 20px;
+  transition: all 0.5s ease-in-out;
+}
+
+.taskSwitches--wrapper.slide::after {
+  left: 43%;
 }
 
 .switchBtn {
-  background-color: #fff;
+  background-color: transparent;
   border: none;
   border-radius: 20px;
   padding: 10px;
   font-size: 1.5rem;
   color: #4180ff;
   user-select: none;
+  position: relative;
   cursor: pointer;
+  z-index: 2;
 }
 
 .switchBtn.active {
-  background-color: #4180ff;
   color: #fff;
 }
 
@@ -148,5 +167,8 @@ button:focus {
     font-size: 2rem;
     padding: 15px 30px;
     border-radius: 25px 0 25px 0;
+  }
+  .taskSwitches--wrapper::after {
+    display: none;
   }
 }
