@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-  margin: 50px;
+  margin: 50px 10px;
   display: flex;
   justify-content: center;
 }
@@ -22,31 +22,30 @@ body {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
   background-color: #fff;
-  padding: 40px;
+  padding: 20px;
   border-radius: 20px;
   width: 100%;
 }
 
-.header > .addTask {
-  display: flex;
-  align-items: center;
+.header .addTask {
+  margin-top: 15px;
 }
-
 .logo {
   display: flex;
   align-items: center;
 }
 
 .logo img {
-  width: 50px;
+  width: 30px;
 }
 
 .logo span {
   margin-left: 10px;
   font-weight: bolder;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .button {
@@ -56,6 +55,7 @@ body {
   padding: 10px;
   font-size: 1.5rem;
   color: #fff;
+  width: 100%;
 }
 
 .button > i {
@@ -65,14 +65,13 @@ body {
 }
 
 .searchBar {
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  padding: 0 40px;
+  margin-top: 15px;
+  position: relative;
 }
 
 .searchBar i {
-  position: relative;
+  position: absolute;
+  top: 18px;
   left: calc(100% - 20px);
   color: #afafaf;
 }
@@ -85,4 +84,25 @@ body {
   padding: 12px;
   font-size: 1.4rem;
   border: none;
+}
+
+@media (min-width: 600px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px;
+  }
+  .logo img {
+    width: 50px;
+  }
+  .logo span {
+    font-size: 3rem;
+  }
+  .searchBar {
+    margin: auto 20px;
+    flex-grow: 1;
+  }
+  .header .addTask {
+    margin: auto;
+  }
 }
