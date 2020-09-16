@@ -48,6 +48,10 @@ body {
   font-size: 2rem;
 }
 
+button:focus {
+  outline: 0;
+}
+
 .button {
   background-color: #4180ff;
   border: none;
@@ -86,10 +90,36 @@ body {
   border: none;
 }
 
+.taskSwitches {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.taskSwitches--wrapper {
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.switchBtn {
+  background-color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: #4180ff;
+  user-select: none;
+  cursor: pointer;
+}
+
+.switchBtn.active {
+  background-color: #4180ff;
+  color: #fff;
+}
+
 @media (min-width: 600px) {
   .header {
     flex-direction: row;
-    justify-content: space-between;
     padding: 40px;
   }
   .logo img {
@@ -104,5 +134,19 @@ body {
   }
   .header .addTask {
     margin: auto;
+  }
+  .taskSwitches--wrapper {
+    background-color: #edf2ff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .switchBtn {
+    background-color: #4180ff;
+    color: #fff;
+    font-size: 2rem;
+    padding: 15px 30px;
+    border-radius: 25px 0 25px 0;
   }
 }
