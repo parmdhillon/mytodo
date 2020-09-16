@@ -130,6 +130,7 @@ button:focus {
   position: relative;
   cursor: pointer;
   z-index: 2;
+  -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
