@@ -79,6 +79,12 @@ button:focus {
   color: #ff5c5c;
 }
 
+.errorTxt {
+  color: #ff5c5c;
+  font-size: 1.6rem;
+  display: none;
+}
+
 .searchBar {
   position: relative;
 }
@@ -164,7 +170,13 @@ button:focus {
   width: 100%;
   flex-wrap: nowrap;
   overflow: hidden;
+  position: relative;
 }
+
+.taskDevider {
+  display: none;
+}
+
 .task--wrapper {
   display: flex;
   flex-direction: column;
@@ -318,5 +330,16 @@ button:focus {
   }
   .modal--box {
     max-width: 400px;
+  }
+  .taskDevider {
+    display: unset;
+    position: absolute;
+    width: 3px;
+    border-radius: 10px;
+    background: #dfe7ff;
+    height: calc(100% - 70px);
+    top: 30px;
+    transform: translateX(-50%);
+    left: 50%;
   }
 }

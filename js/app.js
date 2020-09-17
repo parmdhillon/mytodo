@@ -50,10 +50,15 @@ const closeModal = function () {
 const addTaskToList = (e) => {
   e.preventDefault();
   const taskNameEl = document.getElementById('taskName');
+  const taskName = taskNameEl.value;
+  if (taskName == '') {
+    taskNameEl.nextElementSibling.style.display = 'block'; //Display Error Message
+    return;
+  }
   const taskEl = document.createElement('div');
   taskEl.classList.add('task--content', 'active');
   const taskTemplate = `
-      <span>${taskName.value}</span>
+      <span>${taskName}</span>
       <div class="actions">
         <button class="button small">View Task</button>
         <button class="button small danger">Delete</button>
