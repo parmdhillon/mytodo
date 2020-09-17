@@ -141,6 +141,33 @@ button:focus {
 
 .switchBtn.active {
   color: #fff;
+  background-color: #4180ff;
+}
+
+.task--container {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.task--wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 100%;
+  transition: all 0.5s ease-out;
+}
+.task--wrapper.shift {
+  transform: translateX(-100%);
+}
+.task--content {
+  display: flex;
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  min-height: 50px;
+  padding: 10px;
+  margin: 10px 0;
 }
 
 @media (min-width: 600px) {
@@ -177,5 +204,13 @@ button:focus {
   }
   .taskSwitches--wrapper::after {
     display: none;
+  }
+
+  .task--wrapper {
+    width: 50%;
+    padding: 10px;
+  }
+  .task--wrapper.shift {
+    transform: translateX(0%);
   }
 }
