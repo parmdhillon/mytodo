@@ -33,26 +33,32 @@
           </div>
           <div class="searchBar">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="search task..." />
+            <input
+              class="textInput noSelect"
+              type="text"
+              placeholder="search task..."
+            />
           </div>
           <div class="addTask">
-            <button class="button"><i class="fas fa-plus"></i> Add Task</button>
+            <button id="addTaskModalBtn" class="button noSelect">
+              <i class="fas fa-plus"></i> Add Task
+            </button>
           </div>
         </div>
 
         <div class="taskSwitches">
           <div class="taskSwitches--wrapper">
-            <button id="switchBtnActive" class="switchBtn active">
+            <button id="switchBtnActive" class="switchBtn active noSelect">
               Active Tasks
             </button>
-            <button id="switchBtnCompleted" class="switchBtn">
+            <button id="switchBtnCompleted" class="switchBtn noSelect">
               Completed Tasks
             </button>
           </div>
         </div>
 
         <div class="task--container">
-          <div class="task--wrapper">
+          <div id="activeTaskList" class="task--wrapper">
             <div class="task--content active">
               <span>House Cleaning</span>
               <div class="actions">
@@ -61,13 +67,33 @@
               </div>
             </div>
           </div>
-          <div class="task--wrapper">
+          <div id="completedTaskList" class="task--wrapper">
             <div class="task--content completed">
               <span>Cook Food for Evening</span>
               <div class="actions">
                 <button class="button small">View Task</button>
                 <button class="button small danger">Delete</button>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal" id="addTaskModal">
+          <div class="modal--container">
+            <div class="overlay"></div>
+            <div class="modal--box">
+              <span class="closeModal"><i class="fas fa-times"></i></span>
+              <span class="title text-primary">Add Task</span>
+              <form id="addTaskForm">
+                <input
+                  class="textInput noSelect"
+                  type="text"
+                  id="taskName"
+                  placeholder="Task name..."
+                />
+                <button type="submit" d="addTaskBtn" class="button noSelect">
+                  <i class="fas fa-plus"></i> Add Task
+                </button>
+              </form>
             </div>
           </div>
         </div>
