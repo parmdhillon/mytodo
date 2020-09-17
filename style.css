@@ -68,6 +68,16 @@ button:focus {
   margin-right: 5px;
 }
 
+.button.small {
+  width: auto;
+  padding: 5px 22px;
+}
+
+.button.danger {
+  background-color: #fdd0d0;
+  color: #ff5c5c;
+}
+
 .searchBar {
   margin-top: 15px;
   position: relative;
@@ -161,13 +171,48 @@ button:focus {
   transform: translateX(-100%);
 }
 .task--content {
-  display: flex;
   width: 100%;
   background: #fff;
   border-radius: 20px;
   min-height: 50px;
-  padding: 10px;
+  padding: 20px 25px;
   margin: 10px 0;
+  position: relative;
+}
+
+.task--content::after {
+  content: '';
+  width: 15px;
+  left: 0px;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  top: 50%;
+  height: 35px;
+  position: absolute;
+}
+
+.task--content.active::after {
+  background-color: #91ff85;
+}
+.task--content.completed::after {
+  background-color: #fc7676;
+}
+
+.task--content span {
+  font-size: 2rem;
+  display: block;
+}
+
+.task--content .actions {
+  margin-top: 10px;
+}
+
+.task--content .actions > button {
+  margin-right: 15px;
+}
+
+.task--content .actions > button:last-child {
+  margin-right: 0;
 }
 
 @media (min-width: 600px) {
