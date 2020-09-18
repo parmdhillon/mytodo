@@ -1,0 +1,11 @@
+export const switchBtnActive = document.getElementById('switchBtnActive');
+export const switchBtnCompleted = document.getElementById('switchBtnCompleted');
+export const taskEl = document.querySelectorAll('.task--wrapper');
+export const modalOverlays = document.querySelectorAll('.overlay');
+export const modalCloseBtns = document.querySelectorAll('.closeModal');
+export const addTaskModalBtn = document.getElementById('addTaskModalBtn'); //Display Modal Only
+export const addTaskModal = document.getElementById('addTaskModal');
+export const addTaskForm = document.getElementById('addTaskForm'); //Adds Task to the List
+export const activeTaskList = document.getElementById('activeTaskList');
+export const completedTaskList = document.getElementById('completedTaskList');
+export const viewTaskModal = document.getElementById('viewTaskModal');
