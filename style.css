@@ -107,6 +107,16 @@ button:focus {
   border: none;
 }
 
+.inputTextarea {
+  padding: 12px;
+  font-size: 1.4rem;
+  width: 100%;
+  background: #ececec;
+  border: none;
+  resize: none;
+  border-radius: 10px;
+}
+
 .taskSwitches {
   margin: 20px auto;
   display: flex;
@@ -274,6 +284,10 @@ button:focus {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 20px;
+}
+
+.modal--box .info {
+  font-size: 1.6rem;
 }
 
 .closeModal {

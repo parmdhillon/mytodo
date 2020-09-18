@@ -8,6 +8,9 @@ const addTaskModal = document.getElementById('addTaskModal');
 const addTaskForm = document.getElementById('addTaskForm'); //Adds Task to the List
 const activeTaskList = document.getElementById('activeTaskList');
 const completedTaskList = document.getElementById('completedTaskList');
+const viewTaskModal = document.getElementById('viewTaskModal');
+const TASK_ACTIVE = 'active';
+const TASK_COMPLETED = 'completed';
 // Toggles Tasks on Mobile Devices
 const toggleTask = () => {
   if (window.matchMedia('(max-width: 600px)').matches) {
@@ -47,20 +50,33 @@ const closeModal = function () {
   currentModal.style.display = 'none';
 };
 
+const showError = (e) => {
+  e.nextElementSibling.style.display = 'block';
+  setTimeout(() => {
+    e.nextElementSibling.style.display = 'none';
+  }, 2000);
+};
+
 const addTaskToList = (e) => {
   e.preventDefault();
   const taskNameEl = document.getElementById('taskName');
   const taskName = taskNameEl.value;
+  const taskInfoEl = document.getElementById('taskInfo');
+  const taskInfo = taskInfoEl.value;
   if (taskName == '') {
-    taskNameEl.nextElementSibling.style.display = 'block'; //Display Error Message
+    showError(taskNameEl); //Display Error Message Next to the Element
     return;
   }
-  const newTask = new createTask(taskName, 'active', 'TEMP');
+  if (taskInfo == '') {
+    showError(taskInfoEl); //Display Error Message Next to the Element
+    return;
+  }
+  const newTask = new createTask(taskName, 'active', taskInfo);
   newTask.storeTask();
   newTask.updatedUI();
 
   hideAddTaskModal();
-  taskNameEl.value = '';
+  taskNameEl.value = ''; //Empty Input Value
 };
 
 switchBtnActive.addEventListener('click', toggleTask);
@@ -75,18 +91,6 @@ for (modalOverlay of modalOverlays) {
 for (modalCloseBtn of modalCloseBtns) {
   modalCloseBtn.addEventListener('click', closeModal);
 }
-
-const deleteTask = function (id, elem) {
-  elem.remove();
-  let storedTasks = JSON.parse(localStorage.getItem('allTasks'));
-  if (storedTasks) {
-    storedTasks.tasks.splice(
-      storedTasks.tasks.findIndex((task) => task.taskID == id),
-      1
-    );
-    localStorage.setItem('allTasks', JSON.stringify(storedTasks));
-  }
-};
 
 const setDefaultTasks = () => {
   if (!localStorage.getItem('allTasks')) {
@@ -124,6 +128,7 @@ const loadTasks = () => {
 };
 
 class createTask {
+  taskEl;
   constructor(name, status, info, id = false) {
     this.taskName = name;
     this.taskStatus = status;
@@ -148,13 +153,11 @@ class createTask {
   }
 
   updatedUI() {
-    const taskEl = document.createElement('div');
-    const TASK_ACTIVE = 'active';
-    const TASK_COMPLETED = 'completed';
+    this.taskEl = document.createElement('div');
     if (this.taskStatus == TASK_ACTIVE) {
-      taskEl.classList.add('task--content', TASK_ACTIVE);
+      this.taskEl.classList.add('task--content', TASK_ACTIVE);
     } else {
-      taskEl.classList.add('task--content', TASK_COMPLETED);
+      this.taskEl.classList.add('task--content', TASK_COMPLETED);
     }
     const taskTemplate = `
         <span>${this.taskName}</span>
@@ -162,17 +165,64 @@ class createTask {
           <button class="button small">View Task</button>
           <button class="button small danger">Delete</button>
         </div>`;
-    taskEl.innerHTML = taskTemplate;
-    let viewTaskBtn = taskEl.querySelector('button:first-of-type');
-    let deleteTaskBtn = taskEl.querySelector('button:last-of-type');
-    deleteTaskBtn.addEventListener(
-      'click',
-      deleteTask.bind(this, this.taskID, taskEl)
-    );
+    this.taskEl.innerHTML = taskTemplate;
+    let viewTaskBtn = this.taskEl.querySelector('button:first-of-type');
+    viewTaskBtn.addEventListener('click', this.viewTask.bind(this));
+
+    let deleteTaskBtn = this.taskEl.querySelector('button:last-of-type');
+    deleteTaskBtn.addEventListener('click', this.deleteTask.bind(this, false));
     if (this.taskStatus == TASK_ACTIVE) {
-      activeTaskList.insertAdjacentElement('beforeend', taskEl);
+      activeTaskList.insertAdjacentElement('beforeend', this.taskEl);
     } else {
-      completedTaskList.insertAdjacentElement('beforeend', taskEl);
+      completedTaskList.insertAdjacentElement('beforeend', this.taskEl);
+    }
+  }
+
+  viewTask() {
+    let setViewTask = document.createElement('div');
+    let viewTaskTemplate = `
+    <span class="title text-primary">${this.taskName}</span>
+    <p class="info">${this.taskInfo}</p>
+    `;
+    let setStatusBtn = document.createElement('button');
+    if (this.taskStatus == TASK_ACTIVE) {
+      setStatusBtn.classList.add('button', 'danger');
+      setStatusBtn.textContent = 'Set Task Completed';
+    } else {
+      setStatusBtn.classList.add('button');
+      setStatusBtn.textContent = 'Set Task Active';
+    }
+    setStatusBtn.addEventListener('click', this.deleteTask.bind(this, true));
+    setViewTask.innerHTML = viewTaskTemplate;
+
+    viewTaskModal.querySelector('#viewTaskContent').innerHTML = '';
+    viewTaskModal.querySelector('#viewTaskContent').appendChild(setViewTask);
+    viewTaskModal.querySelector('#viewTaskContent').appendChild(setStatusBtn);
+    viewTaskModal.style.display = 'block';
+  }
+
+  deleteTask(isMove = false) {
+    this.taskEl.remove();
+    let storedTasks = JSON.parse(localStorage.getItem('allTasks'));
+    if (storedTasks) {
+      storedTasks.tasks.splice(
+        storedTasks.tasks.findIndex((task) => task.taskID == this.taskID),
+        1
+      );
+      localStorage.setItem('allTasks', JSON.stringify(storedTasks));
+    }
+    if (isMove) {
+      viewTaskModal.style.display = 'none';
+      this.taskStatus =
+        this.taskStatus == TASK_COMPLETED ? TASK_ACTIVE : TASK_COMPLETED;
+      const moveTask = new createTask(
+        this.taskName,
+        this.taskStatus,
+        this.taskInfo,
+        this.taskID
+      );
+      moveTask.storeTask();
+      moveTask.updatedUI();
     }
   }
 }

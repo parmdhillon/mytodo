@@ -62,6 +62,15 @@
           <div class="taskDevider"></div>
           <div id="completedTaskList" class="task--wrapper"></div>
         </div>
+        <div class="modal" id="viewTaskModal">
+          <div class="modal--container">
+            <div class="overlay"></div>
+            <div class="modal--box">
+              <span class="closeModal"><i class="fas fa-times"></i></span>
+              <div id="viewTaskContent"></div>
+            </div>
+          </div>
+        </div>
         <div class="modal" id="addTaskModal">
           <div class="modal--container">
             <div class="overlay"></div>
@@ -74,9 +83,22 @@
                   type="text"
                   id="taskName"
                   placeholder="Task name..."
+                  autocomplete="off"
                 />
                 <p class="errorTxt">Task Name is required.</p>
-                <button type="submit" d="addTaskBtn" class="button noSelect">
+                <textarea
+                  class="inputTextarea noSelect"
+                  id="taskInfo"
+                  rows="6"
+                  placeholder="Task Description..."
+                ></textarea>
+                <p class="errorTxt">Task Description is required.</p>
+                <button
+                  style="margin-top: 15px"
+                  type="submit"
+                  d="addTaskBtn"
+                  class="button noSelect"
+                >
                   <i class="fas fa-plus"></i> Add Task
                 </button>
               </form>
