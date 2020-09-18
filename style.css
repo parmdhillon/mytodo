@@ -231,6 +231,10 @@ button:focus {
   display: block;
 }
 
+#completedTaskList .task--content span {
+  text-decoration: line-through;
+}
+
 .task--content .actions {
   margin-top: 10px;
 }
@@ -297,6 +301,28 @@ button:focus {
   color: #fc7676;
   font-size: 2.3rem;
   cursor: pointer;
+}
+
+.tag {
+  padding: 3px 10px;
+  font-size: 1.3rem;
+  display: inline-block;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.tag.active {
+  background-color: #91ff85;
+  color: #318c27;
+}
+
+.tag.completed {
+  background-color: #ffcaca;
+  color: #e21212;
+}
+
+.modal--box .title.completed {
+  text-decoration: line-through;
 }
 
 @media (min-width: 600px) {

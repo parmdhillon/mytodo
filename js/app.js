@@ -50,10 +50,10 @@ const closeModal = function () {
   currentModal.style.display = 'none';
 };
 
-const showError = (e) => {
-  e.nextElementSibling.style.display = 'block';
+const showError = (element) => {
+  element.nextElementSibling.style.display = 'block';
   setTimeout(() => {
-    e.nextElementSibling.style.display = 'none';
+    element.nextElementSibling.style.display = 'none';
   }, 2000);
 };
 
@@ -76,7 +76,8 @@ const addTaskToList = (e) => {
   newTask.updatedUI();
 
   hideAddTaskModal();
-  taskNameEl.value = ''; //Empty Input Value
+  taskNameEl.value = ''; //Empty Name Input Value
+  taskInfoEl.value = ''; //Empty Info Input Value
 };
 
 switchBtnActive.addEventListener('click', toggleTask);
@@ -93,6 +94,7 @@ for (modalCloseBtn of modalCloseBtns) {
 }
 
 const setDefaultTasks = () => {
+  //If app executes first time, set default data(Tasks)
   if (!localStorage.getItem('allTasks')) {
     let setDefaultTasks = {
       tasks: [
@@ -115,6 +117,7 @@ const setDefaultTasks = () => {
 };
 
 const loadTasks = () => {
+  //Loads Tasks from Local Storage at Initial Execution
   storedTasks = JSON.parse(localStorage.getItem('allTasks'));
   for (task of storedTasks.tasks) {
     let newTask = new createTask(
@@ -128,8 +131,8 @@ const loadTasks = () => {
 };
 
 class createTask {
-  taskEl;
   constructor(name, status, info, id = false) {
+    this.taskEl;
     this.taskName = name;
     this.taskStatus = status;
     this.taskInfo = info;
@@ -170,7 +173,7 @@ class createTask {
     viewTaskBtn.addEventListener('click', this.viewTask.bind(this));
 
     let deleteTaskBtn = this.taskEl.querySelector('button:last-of-type');
-    deleteTaskBtn.addEventListener('click', this.deleteTask.bind(this, false));
+    deleteTaskBtn.addEventListener('click', this.deleteTask.bind(this));
     if (this.taskStatus == TASK_ACTIVE) {
       activeTaskList.insertAdjacentElement('beforeend', this.taskEl);
     } else {
@@ -181,7 +184,8 @@ class createTask {
   viewTask() {
     let setViewTask = document.createElement('div');
     let viewTaskTemplate = `
-    <span class="title text-primary">${this.taskName}</span>
+    <span class="tag ${this.taskStatus}">${this.taskStatus} Task</span>
+    <span class="title text-primary ${this.taskStatus}">${this.taskName}</span>
     <p class="info">${this.taskInfo}</p>
     `;
     let setStatusBtn = document.createElement('button');
@@ -192,7 +196,7 @@ class createTask {
       setStatusBtn.classList.add('button');
       setStatusBtn.textContent = 'Set Task Active';
     }
-    setStatusBtn.addEventListener('click', this.deleteTask.bind(this, true));
+    setStatusBtn.addEventListener('click', this.deleteTask.bind(this, true)); // Delete and Move
     setViewTask.innerHTML = viewTaskTemplate;
 
     viewTaskModal.querySelector('#viewTaskContent').innerHTML = '';
@@ -201,7 +205,7 @@ class createTask {
     viewTaskModal.style.display = 'block';
   }
 
-  deleteTask(isMove = false) {
+  deleteTask(e, isMove = false) {
     this.taskEl.remove();
     let storedTasks = JSON.parse(localStorage.getItem('allTasks'));
     if (storedTasks) {
@@ -212,6 +216,7 @@ class createTask {
       localStorage.setItem('allTasks', JSON.stringify(storedTasks));
     }
     if (isMove) {
+      //Toggles Task Status i.e; Active/Completed
       viewTaskModal.style.display = 'none';
       this.taskStatus =
         this.taskStatus == TASK_COMPLETED ? TASK_ACTIVE : TASK_COMPLETED;
