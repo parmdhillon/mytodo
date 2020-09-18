@@ -75,7 +75,20 @@ for (modalOverlay of modalOverlays) {
 for (modalCloseBtn of modalCloseBtns) {
   modalCloseBtn.addEventListener('click', closeModal);
 }
-const setDefaultTaks = () => {
+
+const deleteTask = function (id, elem) {
+  elem.remove();
+  let storedTasks = JSON.parse(localStorage.getItem('allTasks'));
+  if (storedTasks) {
+    storedTasks.tasks.splice(
+      storedTasks.tasks.findIndex((task) => task.taskID == id),
+      1
+    );
+    localStorage.setItem('allTasks', JSON.stringify(storedTasks));
+  }
+};
+
+const setDefaultTasks = () => {
   if (!localStorage.getItem('allTasks')) {
     let setDefaultTasks = {
       tasks: [
@@ -103,8 +116,8 @@ const loadTasks = () => {
     let newTask = new createTask(
       task.taskName,
       task.taskStatus,
-      task.taskID,
-      task.taskInfo
+      task.taskInfo,
+      task.taskID
     );
     newTask.updatedUI();
   }
@@ -150,6 +163,12 @@ class createTask {
           <button class="button small danger">Delete</button>
         </div>`;
     taskEl.innerHTML = taskTemplate;
+    let viewTaskBtn = taskEl.querySelector('button:first-of-type');
+    let deleteTaskBtn = taskEl.querySelector('button:last-of-type');
+    deleteTaskBtn.addEventListener(
+      'click',
+      deleteTask.bind(this, this.taskID, taskEl)
+    );
     if (this.taskStatus == TASK_ACTIVE) {
       activeTaskList.insertAdjacentElement('beforeend', taskEl);
     } else {
@@ -160,7 +179,7 @@ class createTask {
 
 class App {
   static init() {
-    setDefaultTaks();
+    setDefaultTasks();
     loadTasks();
   }
 }
