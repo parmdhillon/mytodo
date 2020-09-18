@@ -116,6 +116,23 @@ const setDefaultTasks = () => {
   }
 };
 
+const checkEmpty = (taskList) => {
+  //Checks if Task List is Empty then Display related Message
+  if (taskList == TASK_ACTIVE) {
+    if (activeTaskList.querySelector('.task--content') == null) {
+      activeTaskList.querySelector('.empty').style.display = 'block';
+    } else {
+      activeTaskList.querySelector('.empty').style.display = 'none';
+    }
+  } else {
+    if (completedTaskList.querySelector('.task--content') == null) {
+      completedTaskList.querySelector('.empty').style.display = 'block';
+    } else {
+      completedTaskList.querySelector('.empty').style.display = 'none';
+    }
+  }
+};
+
 const loadTasks = () => {
   //Loads Tasks from Local Storage at Initial Execution
   storedTasks = JSON.parse(localStorage.getItem('allTasks'));
@@ -128,6 +145,8 @@ const loadTasks = () => {
     );
     newTask.updatedUI();
   }
+  checkEmpty(TASK_COMPLETED);
+  checkEmpty(TASK_ACTIVE);
 };
 
 class createTask {
@@ -179,6 +198,7 @@ class createTask {
     } else {
       completedTaskList.insertAdjacentElement('beforeend', this.taskEl);
     }
+    checkEmpty(this.taskStatus);
   }
 
   viewTask() {
@@ -207,6 +227,7 @@ class createTask {
 
   deleteTask(e, isMove = false) {
     this.taskEl.remove();
+    checkEmpty(this.taskStatus);
     let storedTasks = JSON.parse(localStorage.getItem('allTasks'));
     if (storedTasks) {
       storedTasks.tasks.splice(

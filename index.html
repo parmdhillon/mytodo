@@ -58,9 +58,19 @@
         </div>
 
         <div class="task--container">
-          <div id="activeTaskList" class="task--wrapper"></div>
+          <div id="activeTaskList" class="task--wrapper">
+            <div class="empty">
+              <i class="fas fa-check"></i>
+              <span>"Nothing left to do"</span>
+            </div>
+          </div>
           <div class="taskDevider"></div>
-          <div id="completedTaskList" class="task--wrapper"></div>
+          <div id="completedTaskList" class="task--wrapper">
+            <div class="empty">
+              <i class="fas fa-thumbs-up"></i>
+              <span>"All Tasks Completed"</span>
+            </div>
+          </div>
         </div>
         <div class="modal" id="viewTaskModal">
           <div class="modal--container">

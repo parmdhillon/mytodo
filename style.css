@@ -247,6 +247,23 @@ button:focus {
   margin-right: 0;
 }
 
+.task--wrapper .empty {
+  display: none;
+}
+
+.task--wrapper .empty > i {
+  display: block;
+  font-size: 6rem;
+  color: #3fde75;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.task--wrapper .empty > span {
+  display: block;
+  text-align: center;
+  font-size: 2rem;
+  color: #9096a7;
+}
 .overlay {
   z-index: 3;
   transition: opacity 0.3s;
