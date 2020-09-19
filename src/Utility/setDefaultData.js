@@ -10,9 +10,9 @@ export const setDefaultTasks = () => {
           taskInfo: 'I have to clean the whole house today till 10AM',
         },
         {
+          taskID: 2,
           taskName: 'GitHub Project',
           taskStatus: 'completed',
-          taskID: 2,
           taskInfo: 'I have completed MyToDo Project on GitHub',
         },
       ],

@@ -1,0 +1,25 @@
+{
+  "name": "mytodo",
+  "version": "1.0.0",
+  "description": "A To Do List application with Vanilla JavaScript. No JS Libraries used, No CSS Framework used. All from scratch!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parmdhillon/mytodo.git"
+  },
+  "author": "Parminder Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parmdhillon/mytodo/issues"
+  },
+  "homepage": "https://github.com/parmdhillon/mytodo#readme",
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
