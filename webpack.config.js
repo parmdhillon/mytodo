@@ -2,10 +2,12 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/app.js',
   output: {
     filename: 'app.js',
     path: path.resolve(__dirname, 'js'),
+    publicPath: 'js',
   },
+  devtool: 'eval-cheap-module-source-map',
 };
