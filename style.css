@@ -85,15 +85,8 @@ button:focus {
   display: none;
 }
 
-.searchBar {
-  position: relative;
-}
-
-.searchBar i {
-  position: absolute;
-  top: 30px;
-  left: calc(100% - 20px);
-  color: #afafaf;
+.addTask {
+  margin-top: 15px;
 }
 
 .textInput {
@@ -345,6 +338,7 @@ button:focus {
 @media (min-width: 600px) {
   .header {
     flex-direction: row;
+    justify-content: space-between;
     padding: 40px;
   }
   .logo img {
@@ -356,9 +350,6 @@ button:focus {
   .searchBar {
     margin: auto 20px;
     flex-grow: 1;
-  }
-  .header .addTask {
-    margin: auto;
   }
   .taskSwitches--wrapper {
     background-color: #edf2ff;

@@ -46,9 +46,9 @@ export class createTask {
     let deleteTaskBtn = this.taskEl.querySelector('button:last-of-type');
     deleteTaskBtn.addEventListener('click', this.deleteTask.bind(this));
     if (this.taskStatus == TASK_ACTIVE) {
-      activeTaskList.insertAdjacentElement('beforeend', this.taskEl);
+      element.activeTaskList.insertAdjacentElement('beforeend', this.taskEl);
     } else {
-      completedTaskList.insertAdjacentElement('beforeend', this.taskEl);
+      element.completedTaskList.insertAdjacentElement('beforeend', this.taskEl);
     }
     createTask.checkEmpty(this.taskStatus);
   }
@@ -66,7 +66,7 @@ export class createTask {
       setStatusBtn.textContent = 'Set Task Completed';
     } else {
       setStatusBtn.classList.add('button');
-      setStatusBtn.textContent = 'Set Task Active';
+      setStatusBtn.textContent = 'Set Task Actives';
     }
     setStatusBtn.addEventListener('click', this.deleteTask.bind(this, true)); // Delete and Move
     setViewTask.innerHTML = viewTaskTemplate;
