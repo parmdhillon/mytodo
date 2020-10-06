@@ -66,7 +66,7 @@ export class createTask {
       setStatusBtn.textContent = 'Set Task Completed';
     } else {
       setStatusBtn.classList.add('button');
-      setStatusBtn.textContent = 'Set Task Actives';
+      setStatusBtn.textContent = 'Set Task Active';
     }
     setStatusBtn.addEventListener('click', this.deleteTask.bind(this, true)); // Delete and Move
     setViewTask.innerHTML = viewTaskTemplate;
